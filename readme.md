@@ -89,11 +89,10 @@ python app.py
 
 The project is deployed on Render using Gunicorn with MongoDB Atlas as the online database.
 
-👤 Admin Credentials (Demo)
+## Admin Access
+Admin credentials are configured for demonstration purposes only.
+For security reasons, credentials are not shared publicly.
 
-Username: admin
-
-Password: 12345
 
 (Change credentials for production use)
 
