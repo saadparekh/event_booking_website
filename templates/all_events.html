@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>All Events</h2>
+
+<div class="card" style="margin-bottom:14px;">
+    <form method="GET" action="/all-events" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <input type="text" name="search" placeholder="Search events..." 
+               value="{{ request.args.get('search','') }}" style="flex:1;">
+        
+        <select name="category" style="width:200px;">
+            <option value="">All categories</option>
+            {% for opt in ["Concert","Theatre","Sports","Comedy","Conference","Workshop","Autoshow","Other"] %}
+
+                <option value="{{ opt }}" {% if request.args.get('category')==opt %}selected{% endif %}>{{ opt }}</option>
+            {% endfor %}
+        </select>
+
+        <button class="btn" type="submit">Filter</button>
+    </form>
+</div>
+
+<div class="event-list">
+    {% for e in events %}
+    <div class="event-card card">
+
+        {% set img_path = e.image if e.image else url_for('static', filename='uploads/' + (e.category|lower|default('other')) + '.png') %}
+        <img src="{{ img_path }}" alt="{{ e.title }}">
+
+        <h3>{{ e.title }}</h3>
+
+        <div class="meta">
+            <div>{{ e.category }} • {{ e.date }} {{ e.time or "" }}</div>
+            <div>Rs {{ e.price }}</div>
+        </div>
+
+        <p class="small">{{ e.location }}</p>
+
+        <div style="margin-top:8px; display:flex; gap:6px;">
+            {% if is_admin %}
+                <a class="btn" style="background:#444;" href="/update-event/{{ e._id }}">Edit</a>
+                <a class="btn-del" href="/delete-event/{{ e._id }}"
+                   onclick="return confirm('Delete this event?')">Delete</a>
+            {% else %}
+                <a class="btn" href="/book/{{ e._id }}">Book Now</a>
+            {% endif %}
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

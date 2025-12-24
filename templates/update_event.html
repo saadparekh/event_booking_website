@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="max-width:780px; margin:auto;">
+    <h2>Edit Event</h2>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="/update-event/{{ event._id }}" id="updateForm" novalidate>
+        <label>Title</label>
+        <input type="text" name="title" value="{{ event.title }}" required>
+
+        <label>Category</label>
+        <select name="category" required>
+            <option value="">-- Select --</option>
+            {% for opt in ["Concert","Theatre","Sports","Comedy","Conference","Workshop","Other"] %}
+                <option value="{{ opt }}" {% if event.category == opt %}selected{% endif %}>{{ opt }}</option>
+            {% endfor %}
+        </select>
+
+        <div style="display:flex; gap:12px; align-items:center;">
+            <div style="flex:1">
+                <label>Date</label>
+                <input type="date" name="date" id="updateDate" value="{{ event.date }}" required>
+            </div>
+            <div style="width:140px;">
+                <label>Time</label>
+                <input type="time" name="time" value="{{ event.time }}" required>
+            </div>
+        </div>
+
+        <label>Location</label>
+        <input type="text" name="location" value="{{ event.location }}" required>
+
+        <div style="display:flex; gap:12px;">
+            <div style="flex:1">
+                <label>Price (PKR)</label>
+                <input type="number" name="price" min="0" value="{{ event.price }}" required>
+            </div>
+            <div style="width:160px;">
+                <label>Available Seats</label>
+                <input type="number" name="available_seats" min="1" value="{{ event.available_seats }}" required>
+            </div>
+        </div>
+
+        <label>Image URL (this feature is coming soon)</label>
+        <input type="url" name="image" placeholder="Paste image url if you want to change">
+        {% if event.image %}
+            <div style="margin-top:8px;">
+                <small class="small">Current image preview:</small>
+                <div style="margin-top:6px;">
+                    <img src="{{ event.image }}" alt="preview" style="width:220px;height:120px;object-fit:cover;border-radius:6px;">
+                </div>
+            </div>
+        {% endif %}
+
+        <button type="submit" class="btn" style="margin-top:12px;">Save Changes</button>
+    </form>
+</div>
+
+<script>
+    // set min date to today
+    const updateDate = document.getElementById('updateDate');
+    if (updateDate) {
+        const today = new Date().toISOString().split('T')[0];
+        updateDate.setAttribute('min', today);
+    }
+</script>
+{% endblock %}
+
+

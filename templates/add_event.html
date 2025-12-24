@@ -1,0 +1,64 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="max-width:780px; margin:auto;">
+    <h2>Add New Event</h2>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="/add-event" id="addEventForm" novalidate>
+        <label>Title</label>
+        <input type="text" name="title" placeholder="Event title" required>
+
+        <label>Category</label>
+        <select name="category" required>
+            <option value="">-- Select Category --</option>
+            <option>Concert</option>
+            <option>Theatre</option>
+            <option>Sports</option>
+            <option>Comedy</option>
+            <option>Conference</option>
+            <option>Workshop</option>
+            <option>Autoshow</option>
+            <option>Other</option>
+        </select>
+
+        <div style="display:flex; gap:12px; align-items:center;">
+            <div style="flex:1">
+                <label>Date</label>
+                <input type="date" name="date" id="evtDate" required>
+            </div>
+            <div style="width:140px;">
+                <label>Time</label>
+                <input type="time" name="time" required>
+            </div>
+        </div>
+
+        <label>Location</label>
+        <input type="text" name="location" placeholder="Enter location" required>
+
+        <div style="display:flex; gap:12px;">
+            <div style="flex:1">
+                <label>Price (PKR)</label>
+                <input type="number" name="price" min="0" placeholder="Price" required>
+            </div>
+            <div style="width:160px;">
+                <label>Available Seats</label>
+                <input type="number" name="available_seats" min="1" placeholder="Seats" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn" style="margin-top:12px;">Add Event</button>
+    </form>
+</div>
+
+<script>
+    const dateInput = document.getElementById('evtDate');
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+    }
+</script>
+{% endblock %}

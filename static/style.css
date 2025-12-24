@@ -1,0 +1,90 @@
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #f5f7fa;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+    background: #4f46e5;
+    padding: 15px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+/* ---------- EVENT CARDS ---------- */
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 30px;
+}
+
+.event-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+.event-img {
+    width: 100%;
+    border-radius: 10px;
+    height: 170px;
+    object-fit: cover;
+}
+
+/* ---------- FORM ---------- */
+.form-box {
+    width: 400px;
+    margin: 35px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.btn {
+    background: #4f46e5;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.title {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 28px;
+}
+
+.total-box {
+    margin: 10px 0;
+    font-weight: bold;
+    color: green;
+    background: #e8ffe8;
+    padding: 10px;
+    border-radius: 6px;
+}
